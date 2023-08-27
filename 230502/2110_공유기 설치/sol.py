@@ -1,12 +1,14 @@
 import sys
 sys.stdin = open('input.txt')
 
+import sys
+input = sys.stdin.readline
 # 집 수, 공유기 개수
 n, c = map(int, input().split())
 
 arr = []
 for i in range(n):
-    a= int(input())
+    a = int(input())
     arr.append(a)
 
 arr.sort()
