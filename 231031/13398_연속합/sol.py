@@ -4,17 +4,26 @@ sys.stdin = open('input.txt')
 import sys
 input = sys.stdin.readline
 
-n = int(input())
-arr = list(map(int, input().split()))
-dp1 = [0 for _ in range(n)]
-dp2 = [0 for _ in range(n)]
-dp1[0] = arr[0]
-dp2[0] = -999999999
-result = -999999999
-for i in range(1, n):
-    dp1[i] = max(arr[i], arr[i]+dp1[i-1])
-    dp2[i] = max(dp1[i-1], dp2[i-1]+arr[i])
+n, m = map(int, input().split())
 
-for i in range(n):
-    result = max(result, dp1[i], dp2[i])
-print(result)
+arr = [int(input()) for _ in range(n)]
+arr.sort()
+
+def solution(arr, n, m):
+    left, right = 0, 0
+    res = 2000000000
+    while right < n:
+        temp = arr[right] - arr[left]
+        if temp < m:
+            right += 1
+        elif temp > m:
+            res = min(temp, res)
+            left += 1
+        else:
+            return m
+    return res
+
+# 답변 구하기
+res = solution(arr, n, m)
+
+print(res)
